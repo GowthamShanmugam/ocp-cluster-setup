@@ -1,7 +1,7 @@
 {
   "email_id" : "ocpclusterbot@gmail.com",
   "email_pass": "",
-  "receiver_emails": ["gshanmug@redhat.com", "nthomas@redhat.com", "afrahman@redhat.com", "asachan@redhat.com", "bkunal@redhat.com", "anbehl@redhat.com", "vbadrina@redhat.com", "tjeyasin@redhat.com", "amohan@redhat.com", "uchapaga@redhat.com", "jpanda@redhat.com", "skatiyar@redhat.com", "prasriva@redhat.com"],
+  "receiver_emails": ["gshanmug@redhat.com", "nthomas@redhat.com", "afrahman@redhat.com", "asachan@redhat.com", "badhikar@redhat.com", "anbehl@redhat.com", "vbadrina@redhat.com", "tjeyasin@redhat.com", "amohan@redhat.com", "uchapaga@redhat.com", "jpanda@redhat.com", "skatiyar@redhat.com", "prasriva@redhat.com"],
   "auth": "ssl",
   "email_smtp_port": 465,
   "email_smtp_server": "smtp.gmail.com"

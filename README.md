@@ -37,11 +37,11 @@
             "email_pass": "",    // Mandatory
             "receiver_emails": ["abc@gmail.com", "xyz@gmail.com"],    // list of email
          }
- ## Logs:
+ ### Logs:
      ocpClusterSetup/log/ocpClusterInstallation.log (scrip related logs)
      /tmp/{clustername-uuid}/.openshift_install.log (openshift-installer logs)
  
- ## Note:
+ ### Note:
      Any changes in OCP build version then please remove ocpClusterSetup/openshift-installer and ocpClusterSetup/openshift-installer.tar.gz, Otherwise it will
      install previously mentioned OCP version.
         

@@ -59,5 +59,8 @@
               "email_smtp_port": 465,
               "email_smtp_server": "smtp.gmail.com"
          }
+ ## Logs:
+    PycharmProjects/ocpClusterSetup/log/ocpClusterInstallation.log (scrip related logs)
+    /tmp/{clustername-uuid}/.openshift_install.log (openshift-installer logs)
         
 

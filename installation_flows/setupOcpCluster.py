@@ -59,4 +59,4 @@ def setupOcpCluster(baseDir):
     except Exception as ex:
         log.warning('Error in ocp cluster setup %s', ex)
         log.warning('...Destroying the cluster')
-        os.system(os.path.join(baseDir, openshiftInstallerExe) + ' create destroy --dir ' + dirPath)
+        os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)

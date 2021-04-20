@@ -43,7 +43,9 @@
             "cron_setup": {
                 "cron_schedule": "0 09 * * TUE" // For more help: https://crontab.guru/  (only for scheduled deployment)
             },
-            "dir_path": "/tmp"  // Directory will created like /tmp/{clusterName-uuid} (you can find exact name in PycharmProjects/ocpClusterSetup/log/ocpClusterInstallation.log)
+            "dir_path": "/tmp",  // Directory will created like /tmp/{clusterName-uuid} (you can find exact name in PycharmProjects/ocpClusterSetup/log/ocpClusterInstallation.log)
+            "enable_notification": true,  // you can disable notification by changing this to false
+            "deploy_ocs": true // you can skip OCS deployment by changing this to false
         }
      
      

@@ -19,9 +19,15 @@ def _updateInstallConfig(installConfig, clusterConfig, clusterName):
 
 
 def setupOcpCluster(baseDir):
+    # Reading config files
     localConfig = utils.readConfigFile(baseDir, 'config', 'localConfig.json')
     clusterConfig = utils.readConfigFile(baseDir, 'config', 'clusterConfig.json')
+    installConfig = utils.readConfigFile(baseDir, 'config', 'installConfig.yaml')
+
+    # Unique cluster creation
     clusterName = clusterConfig['ocp']['setup_info']['cluster_name'] + '-' + str(uuid.uuid4())
+
+    # Paths
     dirPath = os.path.join(localConfig['dir_path'], clusterName)
     openshiftInstallerExe = os.path.join(baseDir, 'openshift-installer', 'openshift-install')
     openshiftInstallerPath = os.path.join(baseDir, 'openshift-installer')
@@ -33,14 +39,17 @@ def setupOcpCluster(baseDir):
     )
 
     try:
+        # Creating cluster setup dir
         log.info('Creating a directory for cluster setup: %s', dirPath)
         os.mkdir(dirPath)
 
-        installConfig = utils.readConfigFile(baseDir, 'config', 'installConfig.yaml')
+        # Updating install config based on clusterConfig.json
         _updateInstallConfig(installConfig, clusterConfig, clusterName)
         with open(os.path.join(dirPath, 'install-config.yaml'), 'w') as yaml_file:
             yaml.dump(installConfig, yaml_file, default_flow_style=False)
             log.info('Install config: %s', installConfig)
+
+        # Skip download of openshift-installer if already exists
         if(not os.path.exists(openshiftInstallerExe)):
             log.info('...Downloading openshift-installer')
             urllib.request.urlretrieve(openshiftInstallerRepoLink, openshiftInstallerGzPath)
@@ -48,13 +57,18 @@ def setupOcpCluster(baseDir):
             tar = tarfile.open(openshiftInstallerGzPath, 'r')
             tar.extractall(openshiftInstallerPath)
             tar.close()
+
         log.info('!---------------Creating a new cluster ------------!')
         os.system(os.path.join(baseDir, openshiftInstallerExe) + ' create cluster --dir ' + dirPath)
         log.info('!---------------Cluster is created successfully ------------!')
         kubeConfig = utils.readConfigFile(dirPath, 'auth', 'kubeconfig')['clusters'][0]
         server = kubeConfig['cluster']['server']
         password = utils.readConfigFile(dirPath, 'auth', 'kubeadmin-password')
+
+        # Deploy OCS
         deployOcs(baseDir, server, password, localConfig['deploy_ocs'])
+
+        # Send cluster info as email notification
         sendEmail(baseDir, server, password, clusterName, dirPath, localConfig['enable_notification'])
     except Exception as ex:
         log.warning('Error in ocp cluster setup %s', ex)

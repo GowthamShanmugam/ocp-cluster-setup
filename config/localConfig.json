@@ -1,7 +1,5 @@
 {
-  "cron_setup": {
-    "cron_schedule": "0 9 * * 1-5"
-  },
+  "cron_schedule": "0 8 * * 1-5",
   "dir_path": "/tmp",
   "enable_notification": true,
   "deploy_ocs": true

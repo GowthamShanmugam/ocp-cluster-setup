@@ -1,10 +1,9 @@
 import os
 import sys
 import logging as log
-from pathlib import Path
 from installation_flows import setupOcpCluster, cronJobSetup
 
-baseDir = Path(sys.argv[0]).parent
+baseDir = os.path.dirname(os.path.abspath(__file__))
 log.basicConfig(filename=os.path.join(baseDir, 'log', 'ocpClusterInstallation.log'), filemode='a', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',  level=log.INFO)
 def main(cronExecution):
     try:

@@ -5,10 +5,10 @@
     2. Scheduled Deployment (Cron Job)
 
 ### For immediate deployment
-    PycharmProjects/ocpClusterSetup/venv/bin/python3.9 main.py
+   /home/gshanmug/PycharmProjects/ocpClusterSetup/venv/bin/python3.9 /home/gshanmug/PycharmProjects/ocpClusterSetup/main.py (use full path like this)
 
 ### For scheduled deployment
-    PycharmProjects/ocpClusterSetup/venv/bin/python3.9 main.py true
+   /home/gshanmug/PycharmProjects/ocpClusterSetup/venv/bin/python3.9 /home/gshanmug/PycharmProjects/ocpClusterSetup/main.py true
 
 ### Deployment configuration
     Before deployment make sure these changes are done
@@ -52,7 +52,7 @@
     3. Modify config/emailConfig.json file as per your need:
         
          {
-             "email_id" : "tendrlalerting@gmail.com", // Email id should have (Allow less secure apps permission enabled), for now i prefer to use this
+             "email_id" : "ocpclusterbot@gmail.com", // Email id should have (Allow less secure apps permission enabled), for now i prefer to use this
              "email_pass": "",
               "receiver_emails": [""],    // list of email
               "auth": "ssl",
@@ -63,4 +63,5 @@
     PycharmProjects/ocpClusterSetup/log/ocpClusterInstallation.log (scrip related logs)
     /tmp/{clustername-uuid}/.openshift_install.log (openshift-installer logs)
         
+
 

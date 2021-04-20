@@ -1,6 +1,6 @@
 {
   "cron_setup": {
-    "cron_schedule": "0 09 * * TUE"
+    "cron_schedule": "0 9 * * 1-5"
   },
   "dir_path": "/tmp",
   "enable_notification": true,

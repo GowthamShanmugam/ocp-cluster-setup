@@ -147,16 +147,4 @@ spec:
   image: quay.io/rhceph-dev/ocs-registry:4.8.0-303.ci
   publisher: Red Hat
   sourceType: grpc
----
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: ocs-subscription
-  namespace: openshift-storage
-spec:
-  channel: alpha
-  config:
-    resources: {}
-  name: ocs-operator
-  source: ocs-catalogsource
-  sourceNamespace: openshift-marketplace
+  

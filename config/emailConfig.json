@@ -1,0 +1,8 @@
+{
+  "email_id" : "tendrlalerting@gmail.com",
+  "email_pass": "",
+  "receiver_emails": [""],
+  "auth": "ssl",
+  "email_smtp_port": 465,
+  "email_smtp_server": "smtp.gmail.com"
+}

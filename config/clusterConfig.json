@@ -1,0 +1,20 @@
+{
+  "ocp" : {
+    "setup_info": {
+      "cluster_name": "test",
+      "base_domain": "devcluster.openshift.com",
+      "platform": "aws",
+      "type": "m4.2xlarge",
+      "region": "us-east-1",
+      "pull_secret": ""
+    },
+    "build_info": {
+      "base_repo": "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp-dev-preview",
+      "build_version": "latest-4.8",
+      "build_name": "openshift-install-linux.tar.gz"
+    }
+  },
+  "ocs": {
+    "ocs_build": "quay.io/rhceph-dev/ocs-registry:4.8.0-303.ci"
+  }
+}

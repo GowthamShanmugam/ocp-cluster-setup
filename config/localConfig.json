@@ -1,0 +1,8 @@
+{
+  "cron_setup": {
+    "cron_schedule": "0 09 * * TUE"
+  },
+  "dir_path": "/tmp",
+  "enable_notification": true,
+  "deploy_ocs": true
+}

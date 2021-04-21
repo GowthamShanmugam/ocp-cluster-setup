@@ -13,8 +13,17 @@ def _updateInstallConfig(installConfig, clusterConfig, clusterName):
     installConfig['baseDomain'] = clusterConfig['ocp']['setup_info']['base_domain']
     installConfig['metadata']['name'] = clusterName
     installConfig['platform'] = {clusterConfig['ocp']['setup_info']['platform']: {"region" : clusterConfig['ocp']['setup_info']['region']}}
+
+    # master
     installConfig['controlPlane']['platform'] = {
-      clusterConfig['ocp']['setup_info']['platform']: {"type": clusterConfig['ocp']['setup_info']['type']}}
+      clusterConfig['ocp']['setup_info']['platform']: {"type": clusterConfig['ocp']['setup_info']['master_type']}}
+    installConfig['controlPlane']['replicas'] = clusterConfig['ocp']['setup_info']['master_replicas']
+
+    # worker
+    installConfig['compute'][0]['platform'] = {
+        clusterConfig['ocp']['setup_info']['platform']: {"type": clusterConfig['ocp']['setup_info']['worker_type']}}
+    installConfig['compute'][0]['replicas'] = clusterConfig['ocp']['setup_info']['worker_replicas']
+
     installConfig['pullSecret'] = clusterConfig['ocp']['setup_info']['pull_secret']
 
 

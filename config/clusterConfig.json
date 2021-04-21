@@ -1,10 +1,13 @@
 {
   "ocp" : {
     "setup_info": {
-      "cluster_name": "test",
+      "cluster_name": "bot",
       "base_domain": "devcluster.openshift.com",
+      "worker_replicas": 3,
+      "master_replicas": 3,
       "platform": "aws",
-      "type": "m4.2xlarge",
+      "worker_type": "m5.4xlarge",
+      "master_type": "m4.xlarge",
       "region": "us-east-1",
       "pull_secret": ""
     },

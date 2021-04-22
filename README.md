@@ -43,7 +43,7 @@
      /tmp/{clustername-uuid}/.openshift_install.log (openshift-installer logs)
      
  ### Destroy Cluster
-     ocpClusterSetup/openshift-installer/openshift-install destroy cluster {cluster dir path}  // for path check email/script-logs
+     ocpClusterSetup/openshift-installer/openshift-install destroy cluster --dir {cluster dir path}  // for path check email/script-logs
  
  ### Note:
      Any changes in OCP build version then please remove ocpClusterSetup/openshift-installer and ocpClusterSetup/openshift-installer.tar.gz, Otherwise it will

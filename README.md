@@ -1,8 +1,8 @@
 # OCP Cluster Setup
 
 ## Dependencies
-    1. .[oc].(https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.4/)
-    2. Linux Cron
+   1. [Openshift Client](https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.4/)
+   2. Linux Cron (CentOS/RHEL/Fedora: yum install cronie , Linux/Unix: apt-get install cron)
 
 ## This script provides 2 types of deployment:
     1. Immediate Deployment

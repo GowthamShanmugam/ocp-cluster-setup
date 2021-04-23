@@ -18,6 +18,6 @@
     }
   },
   "ocs": {
-    "ocs_build": "quay.io/rhceph-dev/ocs-registry:4.8.0-303.ci"
+    "ocs_build": "quay.io/ocs-dev/ocs-registry:latest"
   }
 }

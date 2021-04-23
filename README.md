@@ -9,10 +9,10 @@
     2. Scheduled Deployment (Cron Job)
 
 ### For immediate deployment
-   ocpClusterSetup/venv/bin/python3.9 ocpClusterSetup/main.py
+    ocpClusterSetup/venv/bin/python3.9 ocpClusterSetup/main.py
 
 ### For scheduled deployment
-   ocpClusterSetup/venv/bin/python3.9 ocpClusterSetup/main.py true
+    ocpClusterSetup/venv/bin/python3.9 ocpClusterSetup/main.py true
 
 ### Deployment configuration
     Before deployment make sure these mandatory changes are done

@@ -4,7 +4,7 @@
    1. [Openshift Client](https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.4/)
    2. Linux Cron (CentOS/RHEL/Fedora: yum install cronie , Linux/Unix: apt-get install cron)
 
-## This script provides 2 types of deployment:
+## This script provides 2 types of deployment
     1. Immediate Deployment
     2. Scheduled Deployment (Cron Job)
 

@@ -16,7 +16,7 @@ def sendEmail(baseDir, api, password, clusterName, clusterDirPath, enableNotific
                 clusterDirPath, api, password, clusterName, pyjokes.get_joke(language='en')
             )
             msg = MIMEMultipart()
-            msg['Subject'] = "[OCP cluster bot]: cluster -  %s" % clusterName
+            msg['Subject'] = "[OCP cluster bot]: cluster: %s" % clusterName
             msg['From'] = emailConfig['email_id']
             msg['To'] = ', '.join(emailConfig['receiver_emails'])
             msg.attach(MIMEText(body, 'plain'))

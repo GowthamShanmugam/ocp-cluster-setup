@@ -59,7 +59,7 @@ def setupOcpCluster(baseDir):
             log.info('Install config: %s', installConfig)
 
         # Skip download of openshift-installer if already exists
-        if(not os.path.exists(openshiftInstallerExe)):
+        if(not os.path.exists(openshiftInstallerExe) or localConfig['refresh_openshift_installer']):
             log.info('...Downloading openshift-installer')
             urllib.request.urlretrieve(openshiftInstallerRepoLink, openshiftInstallerGzPath)
             log.info('...Unzip openshift-installer')
@@ -83,3 +83,4 @@ def setupOcpCluster(baseDir):
         log.warning('Error in ocp cluster setup %s', ex)
         log.warning('...Destroying the cluster')
         os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)
+

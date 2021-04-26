@@ -75,7 +75,7 @@ def setupOcpCluster(baseDir):
         password = utils.readConfigFile(dirPath, 'auth', 'kubeadmin-password')
 
         # Deploy OCS
-        deployOcs(baseDir, server, password, localConfig['deploy_ocs'])
+        deployOcs(baseDir, dirPath, server, password, localConfig['deploy_ocs'])
 
         # Send cluster info as email notification
         sendEmail(baseDir, server, password, clusterName, dirPath, localConfig['enable_notification'])

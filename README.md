@@ -3,6 +3,7 @@
 ## Dependencies
    1. [Openshift Client](https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.4/)
    2. Linux Cron (CentOS/RHEL/Fedora: yum install cronie , Linux/Unix: apt-get install cron)
+   3. Configure your cloud platform credentials in local
 
 ## This script provides 2 types of deployment
     1. Immediate Deployment

@@ -4,7 +4,7 @@
    1. [Openshift Client](https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.4/)
    2. Linux Cron (CentOS/RHEL/Fedora: yum install cronie , Linux/Unix: apt-get install cron)
    3. Configure your cloud platform credentials in local
-   4. [Python 3.9](https://computingforgeeks.com/install-latest-python-on-centos-linux/)
+   4. Any python3 version
    
 ## Configure virtual environment
     1. yum install python3-virtualenv
@@ -18,10 +18,10 @@
     2. Scheduled Deployment (Cron Job)
 
 ### For immediate deployment
-    python3.9 ~/ocpClusterSetup/main.py
+    python3 ~/ocpClusterSetup/main.py
 
 ### For scheduled deployment
-    python3.9 ~/ocpClusterSetup/main.py true
+    python3 ~/ocpClusterSetup/main.py true
 
 ### Deployment configuration
     Before deployment make sure these mandatory changes are done

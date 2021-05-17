@@ -14,7 +14,7 @@ def sendEmail(baseDir, api, password, clusterName, clusterDirPath, enableNotific
     emailConfig = utils.readConfigFile(baseDir, 'config', 'emailConfig.json')
     try:
         if enableNotification:
-            body = " username: kubeadmin \t\t password: %s \n server: %s \n clusterURL: https://console-openshift-console.apps.%s.devcluster.openshift.com \n clusterDirectory: %s" % (
+            body = " Username: kubeadmin \t\t Password: %s \n Server API: %s \n Cluster URL: https://console-openshift-console.apps.%s.devcluster.openshift.com \n Cluster Directory: %s" % (
                 password, api, clusterName, clusterDirPath
             )
             msg = MIMEMultipart()

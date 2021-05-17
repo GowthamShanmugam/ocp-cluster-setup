@@ -9,7 +9,8 @@ log.basicConfig(filename=os.path.join(baseDir, 'log', 'ocpClusterInstallation.lo
 
 def main(cronExecution):
     try:
-        cronJobSetup.cronJobSetup(baseDir) if cronExecution else setupOcpCluster.setupOcpCluster(baseDir)
+        executionPath = sys.executable
+        cronJobSetup.cronJobSetup(baseDir, executionPath) if cronExecution else setupOcpCluster.setupOcpCluster(baseDir)
         log.info('!------OCP cluster setup is finished successfully------!')
     except Exception as ex:
         log.error("Unable to create OCP cluster: %s", ex)
@@ -17,3 +18,4 @@ def main(cronExecution):
 
 if __name__ == '__main__':
     main(len(sys.argv) > 1)
+

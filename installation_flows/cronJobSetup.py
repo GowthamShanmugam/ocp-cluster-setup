@@ -5,8 +5,7 @@ from crontab import CronTab
 from installation_flows.utils import utils
 
 
-def cronJobSetup(baseDir):
-    dirPath = os.path.join(baseDir, 'venv/bin/python3.9')
+def cronJobSetup(baseDir, executionPath):
     localConfig = utils.readConfigFile(baseDir, 'config', 'localConfig.json')
 
     # Remove all old cron jobs
@@ -14,7 +13,8 @@ def cronJobSetup(baseDir):
 
     # Creating new cron job
     cron = CronTab(user=True)
-    job = cron.new(command=dirPath + ' ' + os.path.join(baseDir, 'main.py'))
+    job = cron.new(command=executionPath + ' ' + os.path.join(baseDir, 'main.py'))
     job.setall(localConfig['cron_schedule'])
     log.info("Setting up cron job under current user at: %s", localConfig['cron_schedule'])
     cron.write()
+

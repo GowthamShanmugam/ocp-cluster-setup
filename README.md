@@ -5,16 +5,21 @@
    2. Linux Cron (CentOS/RHEL/Fedora: yum install cronie , Linux/Unix: apt-get install cron)
    3. Configure your cloud platform credentials in local
    4. [Python 3.9](https://computingforgeeks.com/install-latest-python-on-centos-linux/)
+   
+## Configure virtual environment
+    * yum install python3-virtualenv
+    * virtualenv --python=python3.9 ~/ocp-cluster-setup/venv
+    * pip3.9 install -r requirements.txt
 
 ## This script provides 2 types of deployment
     1. Immediate Deployment
     2. Scheduled Deployment (Cron Job)
 
 ### For immediate deployment
-    ocpClusterSetup/venv/bin/python3.9 ocpClusterSetup/main.py
+    ocpClusterSetup/venv/bin/python3.9 ~/ocpClusterSetup/main.py
 
 ### For scheduled deployment
-    ocpClusterSetup/venv/bin/python3.9 ocpClusterSetup/main.py true
+    ocpClusterSetup/venv/bin/python3.9 ~/ocpClusterSetup/main.py true
 
 ### Deployment configuration
     Before deployment make sure these mandatory changes are done

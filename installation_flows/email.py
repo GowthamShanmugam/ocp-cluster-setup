@@ -1,6 +1,5 @@
 import os.path
 import smtplib
-import pyjokes
 import logging as log
 
 from email.mime.multipart import MIMEMultipart
@@ -15,8 +14,8 @@ def sendEmail(baseDir, api, password, clusterName, clusterDirPath, enableNotific
     emailConfig = utils.readConfigFile(baseDir, 'config', 'emailConfig.json')
     try:
         if enableNotification:
-            body = " clusterDirectory: %s \n server: %s \n password: %s \n username: kubeadmin \n clusterURL: https://console-openshift-console.apps.%s.devcluster.openshift.com \n\n\n Start the day with laugh(:D :D :D): %s" % (
-                clusterDirPath, api, password, clusterName, pyjokes.get_joke(language='en')
+            body = " username: kubeadmin \t\t password: %s \n server: %s \n clusterURL: https://console-openshift-console.apps.%s.devcluster.openshift.com \n clusterDirectory: %s" % (
+                password, api, clusterName, clusterDirPath
             )
             msg = MIMEMultipart()
             msg['Subject'] = "[OCP cluster bot]: cluster: %s" % clusterName
@@ -50,3 +49,4 @@ def sendEmail(baseDir, api, password, clusterName, clusterDirPath, enableNotific
     ) as ex:
         log.error("Unable to send email: %s", ex)
         raise ex
+

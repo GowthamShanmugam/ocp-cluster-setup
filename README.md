@@ -7,9 +7,11 @@
    4. [Python 3.9](https://computingforgeeks.com/install-latest-python-on-centos-linux/)
    
 ## Configure virtual environment
-    * yum install python3-virtualenv
-    * virtualenv --python=python3.9 ~/ocp-cluster-setup/venv
-    * pip3.9 install -r requirements.txt
+    1. yum install python3-virtualenv
+    2. virtualenv --python=python3.9 ~/ocp-cluster-setup/venv
+    3. cd ~/ocp-cluster-setup/venv/bin
+    4. source activate
+    5. pip3 install -r ~/ocp-cluster-setup/requirements.txt 
 
 ## This script provides 2 types of deployment
     1. Immediate Deployment

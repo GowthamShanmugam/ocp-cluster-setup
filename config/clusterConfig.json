@@ -6,12 +6,21 @@
       "worker_replicas": 3,
       "master_replicas": 3,
       "platform": "aws",
-      "worker_type": "m5.4xlarge",
+      "worker_type": "m5.2xlarge",
       "master_type": "m4.xlarge",
       "region": "us-east-1",
+      "cluster_network": [{
+        "cidr": "10.132.0.0/14",
+        "hostPrefix": 23
+      }],
+      "machine_network": [{
+        "cidr": "10.0.0.0/16"
+      }],
+      "service_network": ["172.31.0.0/16"],
+      "network_type": "OpenShiftSDN",
       "pull_secret": ""
     },
-    "build_info": {
+      "build_info": {
       "base_repo": "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp-dev-preview",
       "build_version": "latest-4.8",
       "build_name": "openshift-install-linux.tar.gz"

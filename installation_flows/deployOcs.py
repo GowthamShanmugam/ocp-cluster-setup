@@ -8,7 +8,7 @@ def deployOcs(baseDir, clusterDir, server, password, deployOcs):
     try:
         if deployOcs:
             clusterConfig = utils.readConfigFile(baseDir, 'config', 'clusterConfig.json')
-            read = open(os.path.join(baseDir, 'config', 'ocsConfig.yaml'), 'r')
+            read = open(os.path.join(baseDir, 'templates', 'ocsConfig.yaml'), 'r')
             configs = list(yaml.load_all(read, Loader=yaml.FullLoader))
             configs[2]['spec']['image'] = clusterConfig['ocs']['ocs_build']
             read.close()
@@ -24,4 +24,3 @@ def deployOcs(baseDir, clusterDir, server, password, deployOcs):
     except Exception as ex:
         log.error("Unable to deploy OCS: %s", ex)
         raise ex
-

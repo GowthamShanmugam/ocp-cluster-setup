@@ -24,6 +24,14 @@ def _updateInstallConfig(installConfig, clusterConfig, clusterName):
         clusterConfig['ocp']['setup_info']['platform']: {"type": clusterConfig['ocp']['setup_info']['worker_type']}}
     installConfig['compute'][0]['replicas'] = clusterConfig['ocp']['setup_info']['worker_replicas']
 
+    # network
+    installConfig['networking'] = {
+        "clusterNetwork": clusterConfig['ocp']['setup_info']['cluster_network'],
+        "machineNetwork": clusterConfig['ocp']['setup_info']['machine_network'],
+        "serviceNetwork": clusterConfig['ocp']['setup_info']['service_network'],
+        "networkType": clusterConfig['ocp']['setup_info']['network_type']
+    }
+
     installConfig['pullSecret'] = clusterConfig['ocp']['setup_info']['pull_secret']
 
 
@@ -31,7 +39,7 @@ def setupOcpCluster(baseDir):
     # Reading config files
     localConfig = utils.readConfigFile(baseDir, 'config', 'localConfig.json')
     clusterConfig = utils.readConfigFile(baseDir, 'config', 'clusterConfig.json')
-    installConfig = utils.readConfigFile(baseDir, 'config', 'installConfig.yaml')
+    installConfig = utils.readConfigFile(baseDir, 'templates', 'installConfig.yaml')
 
     # Unique cluster creation
     clusterName = clusterConfig['ocp']['setup_info']['cluster_name'] + '-' + str(uuid.uuid4())
@@ -82,5 +90,4 @@ def setupOcpCluster(baseDir):
     except Exception as ex:
         log.warning('Error in ocp cluster setup %s', ex)
         log.warning('...Destroying the cluster')
-        os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)
-
+        # os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)

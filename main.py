@@ -17,4 +17,3 @@ def main(cronExecution):
 
 if __name__ == '__main__':
     main(len(sys.argv) > 1)
-

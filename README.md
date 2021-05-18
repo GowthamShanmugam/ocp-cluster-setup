@@ -8,7 +8,7 @@
    
 ## Configure virtual environment
     1. yum install python3-virtualenv
-    2. virtualenv --python=python3.9 ~/ocp-cluster-setup/venv
+    2. virtualenv --python=python3.x ~/ocp-cluster-setup/venv
     3. cd ~/ocp-cluster-setup/venv/bin
     4. source activate
     5. pip3 install -r ~/ocp-cluster-setup/requirements.txt 

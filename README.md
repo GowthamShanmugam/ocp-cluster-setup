@@ -27,7 +27,7 @@
     Before deployment make sure these mandatory changes are done
     
     For fast cluster deployment:
-    --------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------
     1. Modify config/ClusterConfig.json: 
    
         "ocp" : {
@@ -57,7 +57,7 @@
 
 
     For cluster deployment with more custom configurations:
-    ---------------------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------
     1. Paste you own intallConfig content on custom_templates/installConfig.yaml
     
     2. Go to config/clusterConfig.json and enable "custom_install_config_template": true 

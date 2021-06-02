@@ -9,9 +9,8 @@ from installation_flows.utils import utils
 from installation_flows.deployOcs import deployOcs
 from installation_flows.email import sendEmail
 
-def _updateInstallConfig(installConfig, clusterConfig, clusterName):
+def _updateInstallConfig(installConfig, clusterConfig):
     installConfig['baseDomain'] = clusterConfig['ocp']['setup_info']['base_domain']
-    installConfig['metadata']['name'] = clusterName
     installConfig['platform'] = {clusterConfig['ocp']['setup_info']['platform']: {"region" : clusterConfig['ocp']['setup_info']['region']}}
 
     # master
@@ -32,17 +31,18 @@ def _updateInstallConfig(installConfig, clusterConfig, clusterName):
         "networkType": clusterConfig['ocp']['setup_info']['network_type']
     }
 
-    installConfig['pullSecret'] = clusterConfig['ocp']['setup_info']['pull_secret']
-
 
 def setupOcpCluster(baseDir):
     # Reading config files
     localConfig = utils.readConfigFile(baseDir, 'config', 'localConfig.json')
     clusterConfig = utils.readConfigFile(baseDir, 'config', 'clusterConfig.json')
-    installConfig = utils.readConfigFile(baseDir, 'templates', 'installConfig.yaml')
+    intallConfigDir = 'custom_templates' if clusterConfig['ocp']['custom_install_config_template'] else 'templates'
+    installConfig = utils.readConfigFile(baseDir, intallConfigDir, 'installConfig.yaml')
 
     # Unique cluster creation
-    clusterName = clusterConfig['ocp']['setup_info']['cluster_name'] + '-' + str(uuid.uuid4())
+    clusterName = clusterConfig['ocp']['cluster_name'] + '-' + str(uuid.uuid4())
+    installConfig['metadata']['name'] = clusterName
+    installConfig['pullSecret'] = clusterConfig['ocp']['pull_secret']
 
     # Paths
     dirPath = os.path.join(localConfig['dir_path'], clusterName)
@@ -61,7 +61,8 @@ def setupOcpCluster(baseDir):
         os.mkdir(dirPath)
 
         # Updating install config based on clusterConfig.json
-        _updateInstallConfig(installConfig, clusterConfig, clusterName)
+        if intallConfigDir == "templates":
+            _updateInstallConfig(installConfig, clusterConfig)
         with open(os.path.join(dirPath, 'install-config.yaml'), 'w') as yaml_file:
             yaml.dump(installConfig, yaml_file, default_flow_style=False)
             log.info('Install config: %s', installConfig)
@@ -78,16 +79,17 @@ def setupOcpCluster(baseDir):
         log.info('!---------------Creating a new cluster ------------!')
         os.system(os.path.join(baseDir, openshiftInstallerExe) + ' create cluster --dir ' + dirPath)
         log.info('!---------------Cluster is created successfully ------------!')
+
         kubeConfig = utils.readConfigFile(dirPath, 'auth', 'kubeconfig')['clusters'][0]
         server = kubeConfig['cluster']['server']
         password = utils.readConfigFile(dirPath, 'auth', 'kubeadmin-password')
 
         # Deploy OCS
-        deployOcs(baseDir, dirPath, server, password, localConfig['deploy_ocs'])
+        deployOcs(baseDir, dirPath, localConfig['deploy_ocs'])
 
         # Send cluster info as email notification
         sendEmail(baseDir, server, password, clusterName, dirPath, localConfig['enable_notification'])
     except Exception as ex:
         log.warning('Error in ocp cluster setup %s', ex)
         log.warning('...Destroying the cluster')
-        # os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)
+        os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)

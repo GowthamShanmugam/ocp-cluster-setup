@@ -4,7 +4,7 @@ import logging as log
 from installation_flows.utils import utils
 
 
-def deployOcs(baseDir, clusterDir, server, password, deployOcs):
+def deployOcs(baseDir, clusterDir, deployOcs):
     try:
         if deployOcs:
             clusterConfig = utils.readConfigFile(baseDir, 'config', 'clusterConfig.json')
@@ -15,10 +15,8 @@ def deployOcs(baseDir, clusterDir, server, password, deployOcs):
             write = open(os.path.join(clusterDir, 'ocsConfig.yaml'), 'w')
             yaml.dump_all(configs, write, default_flow_style=False, explicit_start=True)
             write.close()
-            log.info('Log in ocp cluster using oc client')
-            os.system('oc login  '+server+' -u kubeadmin -p '+password+'  --insecure-skip-tls-verify')
             log.info('...Deploying OCS %s', clusterConfig['ocs']['ocs_build'])
-            os.system('oc apply -f ' + os.path.join(clusterDir, 'ocsConfig.yaml'))
+            os.system('oc --kubeconfig ' + os.path.join(clusterDir, 'auth/kubeconfig') + ' apply -f ' + os.path.join(clusterDir, 'ocsConfig.yaml'))
         else:
             log.warning("OCS deployment is skipped")
     except Exception as ex:

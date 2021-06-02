@@ -26,7 +26,7 @@
 ### Deployment configuration
     Before deployment make sure these mandatory changes are done
     
-    For fast cluster deployment:
+   ** For fast cluster deployment:**
     ------------------------------------------------------------------------------------------------
     1. Modify config/ClusterConfig.json: 
    
@@ -56,7 +56,7 @@
          
 
 
-    For cluster deployment with more custom configurations:
+   ** For cluster deployment with more custom configurations:**
     --------------------------------------------------------------------------------------------------
     1. Paste you own intallConfig content on custom_templates/installConfig.yaml
     

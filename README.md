@@ -26,6 +26,8 @@
 ### Deployment configuration
     Before deployment make sure these mandatory changes are done
     
+    For fast cluster deployment:
+    --------------------------------------------------------------------------------------------------------------------------------
     1. Modify config/ClusterConfig.json: 
    
         "ocp" : {
@@ -52,6 +54,16 @@
             "receiver_emails": ["abc@gmail.com", "xyz@gmail.com"],    // list of email
          }
          
+
+
+    For cluster deployment with more custom configurations:
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    1. Paste you own intallConfig content on custom_templates/installConfig.yaml
+    
+    2. Go to config/clusterConfig.json and enable "custom_install_config_template": true 
+    
+    (Script wont take any config from setup_info of clusterConfig.json)
+     
  ### Logs
      ocpClusterSetup/log/ocpClusterInstallation.log (script related logs)
      /tmp/{clustername-uuid}/.openshift_install.log (openshift-installer logs)

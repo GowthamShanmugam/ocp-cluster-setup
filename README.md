@@ -23,7 +23,7 @@
 ### For scheduled deployment
     python3 ~/ocpClusterSetup/main.py true
 
-### Deployment configuration
+### Deployment configuration for OCP
     Before deployment make sure these mandatory changes are done
     
     For fast cluster deployment:
@@ -61,6 +61,23 @@
     2. Go to config/clusterConfig.json and enable "custom_install_config_template": true 
     
     (Script wont take any config from setup_info of clusterConfig.json)
+    
+ 
+ ### Deployment configuration OCS
+     1. Modifiy config/LocalConfig.json to deploy OCS:
+        {
+            "deploy_ocs": true    // This will create OCS catalog
+        }
+     
+     2. Modify OCS subscription options in config/ClusterConfig.json: 
+   
+       "ocs": {
+           "ocs_build": "quay.io/ocs-dev/ocs-registry:latest",     // OCS build version
+           "ocs_subscription": {
+                "subscription": "ocs-operator.v4.8.0",             // OCS subscription version
+                "subscribe": true                                  // Enable this to subscribe OCS
+           }
+       }
      
  ### Logs
      ocpClusterSetup/log/ocpClusterInstallation.log (script related logs)

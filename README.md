@@ -89,6 +89,9 @@
  ### Note
      * For any changes in OCP build version (config file) , Please remove ocpClusterSetup/openshift-installer and ocpClusterSetup/openshift-installer.tar.gz. Otherwise, Tt will not consider the new version change.
      * If you dont prefer the above option, Please enable "refresh_openshift_installer" flag( in localConfig). It will download the new build for every new cluster creation request.
+     {
+        "refresh_openshift_installer": true
+     }
         
 
 

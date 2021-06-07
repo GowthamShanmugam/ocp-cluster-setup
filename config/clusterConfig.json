@@ -28,6 +28,10 @@
     }
   },
   "ocs": {
-    "ocs_build": "quay.io/ocs-dev/ocs-registry:latest"
+    "ocs_build": "quay.io/ocs-dev/ocs-registry:latest",
+    "ocs_subscription": {
+        "subscription": "ocs-operator.v4.8.0",
+        "subscribe": true
+    }
   }
 }

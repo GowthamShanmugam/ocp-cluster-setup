@@ -10,7 +10,7 @@ from email import encoders
 from installation_flows.utils import utils
 
 
-def sendEmail(baseDir, api, password, clusterName, clusterDirPath, enableNotification):
+def sendEmail(baseDir, api, password, clusterName, clusterDirPath, ocpReleaseFilePath, enableNotification):
     emailConfig = utils.readConfigFile(baseDir, 'config', 'emailConfig.json')
     try:
         if enableNotification:
@@ -23,7 +23,7 @@ def sendEmail(baseDir, api, password, clusterName, clusterDirPath, enableNotific
             msg['To'] = ', '.join(emailConfig['receiver_emails'])
             msg.attach(MIMEText(body, 'plain'))
 
-            for file in [os.path.join(clusterDirPath, 'auth', 'kubeconfig'), os.path.join(clusterDirPath, 'auth', 'kubeadmin-password'), os.path.join(clusterDirPath, 'metadata.json')]:
+            for file in [os.path.join(clusterDirPath, 'auth', 'kubeconfig'), os.path.join(clusterDirPath, 'auth', 'kubeadmin-password'), os.path.join(clusterDirPath, 'metadata.json'), ocpReleaseFilePath]:
                 part = MIMEBase('application', "octet-stream")
                 part.set_payload(open(file, "rb").read())
                 encoders.encode_base64(part)

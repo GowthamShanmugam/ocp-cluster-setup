@@ -39,6 +39,7 @@ def setupOcpCluster(baseDir):
     intallConfigDir = 'custom_templates' if clusterConfig['ocp']['custom_install_config_template'] else 'templates'
     installConfig = utils.readConfigFile(baseDir, intallConfigDir, 'installConfig.yaml')
 
+
     # Unique cluster creation
     clusterName = clusterConfig['ocp']['cluster_name'] + '-' + str(uuid.uuid4())
     installConfig['metadata']['name'] = clusterName
@@ -53,6 +54,12 @@ def setupOcpCluster(baseDir):
         clusterConfig['ocp']['build_info']['base_repo'],
         clusterConfig['ocp']['build_info']['build_version'],
         clusterConfig['ocp']['build_info']['build_name']
+    )
+    openshiftInstallerReleaseFilePath = os.path.join(openshiftInstallerPath, 'release.txt')
+    openshiftInstallerReleaseFileLink = os.path.join(
+        clusterConfig['ocp']['build_info']['base_repo'],
+        clusterConfig['ocp']['build_info']['build_version'],
+        'release.txt'
     )
 
     try:
@@ -75,6 +82,7 @@ def setupOcpCluster(baseDir):
             tar = tarfile.open(openshiftInstallerGzPath, 'r')
             tar.extractall(openshiftInstallerPath)
             tar.close()
+            urllib.request.urlretrieve(openshiftInstallerReleaseFileLink, openshiftInstallerReleaseFilePath)
 
         log.info('!---------------Creating a new cluster ------------!')
         os.system(os.path.join(baseDir, openshiftInstallerExe) + ' create cluster --dir ' + dirPath)
@@ -88,8 +96,8 @@ def setupOcpCluster(baseDir):
         deployOcs(baseDir, dirPath, localConfig['deploy_ocs'])
 
         # Send cluster info as email notification
-        sendEmail(baseDir, server, password, clusterName, dirPath, localConfig['enable_notification'])
+        sendEmail(baseDir, server, password, clusterName, dirPath, openshiftInstallerReleaseFilePath, localConfig['enable_notification'])
     except Exception as ex:
-        log.warning('Error in ocp cluster setup %s', ex)
+        log.warning('Error in ocp cluster setup %s', ex, exc_info=True)
         log.warning('...Destroying the cluster')
         os.system(os.path.join(baseDir, openshiftInstallerExe) + ' destroy cluster --dir ' + dirPath)

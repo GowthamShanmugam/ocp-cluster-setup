@@ -5,7 +5,7 @@ from installation_flows import setupOcpCluster, cronJobSetup
 
 
 baseDir = os.path.dirname(os.path.abspath(__file__))
-log.basicConfig(filename=os.path.join(baseDir, 'log', 'ocpClusterInstallation.log'), filemode='w', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',  level=log.INFO)
+log.basicConfig(filename=os.path.join(baseDir, 'log', 'ocpClusterInstallation.log'), filemode='w', format='%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s', datefmt='%d-%b-%y %H:%M:%S',  level=log.INFO)
 
 def main(cronExecution):
     try:
@@ -18,4 +18,3 @@ def main(cronExecution):
 
 if __name__ == '__main__':
     main(len(sys.argv) > 1)
-

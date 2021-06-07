@@ -18,10 +18,10 @@
     2. Scheduled Deployment (Cron Job)
 
 ### For immediate deployment
-    python3 ~/ocpClusterSetup/main.py
+    python3 ~/ocp-cluster-setup/main.py
 
 ### For scheduled deployment
-    python3 ~/ocpClusterSetup/main.py true
+    python3 ~/ocp-cluster-setup/main.py true
 
 ### Deployment configuration for OCP
     Before deployment make sure these mandatory changes are done

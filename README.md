@@ -31,9 +31,7 @@
     1. Modify config/ClusterConfig.json: 
    
         "ocp" : {
-            "setup_info": {
                 "pull_secret": ""   // Add your pull secret which should have ci build access
-            },    
         }
 
 
@@ -42,7 +40,7 @@
         {
             "cron_schedule": "0 9 * * 1-5",  // week days 9AM, For more info: https://crontab.guru
             "dir_path": "/tmp",  // cluster setup workspace
-            "refresh_openshift_installer": false, // To control installer download
+            "refresh_openshift_installer": false, // To control OCP installer download
         }
      
      
@@ -69,7 +67,7 @@
      /tmp/{clustername-uuid}/.openshift_install.log (openshift-installer logs)
      
  ### Destroy Cluster
-     ocpClusterSetup/openshift-installer/openshift-install destroy cluster --dir {cluster dir path}  // for path check email/script-logs
+     ocpClusterSetup/openshift-installer/openshift-install destroy cluster --dir {cluster dir path}  // for path check email (or) script-logs
  
  ### Note
      * For any changes in OCP build version (config file) , Please remove ocpClusterSetup/openshift-installer and ocpClusterSetup/openshift-installer.tar.gz. Otherwise, Tt will not consider the new version change.

@@ -28,10 +28,14 @@
     }
   },
   "ocs": {
+    "deploy_ocs": true,
     "ocs_build": "quay.io/ocs-dev/ocs-registry:latest",
-    "ocs_subscription": {
-        "subscription": "ocs-operator.v4.8.0",
-        "subscribe": true
-    }
+    "ocs_subscription": "ocs-operator.v4.8.0",
+    "channel": "alpha"
+  },
+  "acm": {
+    "deploy_acm": false,
+    "acm_subscription": "advanced-cluster-management.v2.2.3",
+    "channel": "release-2.2"
   }
 }

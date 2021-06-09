@@ -3,27 +3,18 @@ import logging as log
 from installation_flows.utils import utils
 
 
-def deployOcs(baseDir, clusterDir, deployOcs):
+def deployOcs(baseDir, clusterDir, clusterConfig):
     try:
-        if deployOcs:
-            clusterConfig = utils.readConfigFile(baseDir, 'config', 'clusterConfig.json')
+        ocsConfig = clusterConfig['ocs']
+        if ocsConfig['deploy_ocs']:
             configs = utils.readArrayOfConfigFile(baseDir, 'templates', 'ocsConfig.yaml')
-            configs[2]['spec']['image'] = clusterConfig['ocs']['ocs_build']
+            configs[2]['spec']['image'] = ocsConfig['ocs_build']
+            configs[3]['spec']['channel'] = ocsConfig['channel']
+            configs[3]['spec']['startingCSV'] = ocsConfig['ocs_subscription']
             utils.writeArrayOfConfigFile(clusterDir, '', 'ocsConfig.yaml', configs)
-            log.info('...Deploying OCS %s', clusterConfig['ocs']['ocs_build'])
-            os.system('oc --kubeconfig ' + os.path.join(clusterDir, 'auth/kubeconfig') + ' apply -f ' + os.path.join(clusterDir, 'ocsConfig.yaml'))
-
-            ocsSubscription = clusterConfig['ocs']['ocs_subscription']
-            if(ocsSubscription['subscribe']):
-                config = utils.readConfigFile(baseDir, 'templates', 'ocsSubscription.yaml')
-                config['spec']['startingCSV'] = ocsSubscription['subscription']
-                utils.writeConfigFile(clusterDir, '', 'ocsSubscription.yaml', config)
-                log.info('Subscribing OCS version: %s', ocsSubscription['subscription'])
-                os.system('oc --kubeconfig ' + os.path.join(clusterDir, 'auth/kubeconfig') + ' apply -f ' + os.path.join(clusterDir, 'ocsSubscription.yaml'))
-            else:
-                log.info('OCS subscription is disabled')
+            log.info('...Deploying OCS %s', ocsConfig['ocs_build'])
+            utils.execute_command(['oc --kubeconfig ' + os.path.join(clusterDir, 'auth/kubeconfig') + ' apply -f ' + os.path.join(clusterDir, 'ocsConfig.yaml')])
         else:
             log.warning("OCS deployment is skipped")
     except Exception as ex:
         log.error("Unable to deploy OCS: %s", ex, exc_info=True)
-        raise ex

@@ -9,7 +9,7 @@ def cronJobSetup(baseDir, executionPath):
     localConfig = utils.readConfigFile(baseDir, 'config', 'localConfig.json')
 
     # Remove all old cron jobs
-    os.system('crontab -r')
+    utils.execute_command(['crontab -r'])
 
     # Creating new cron job
     cron = CronTab(user=True)
@@ -17,4 +17,3 @@ def cronJobSetup(baseDir, executionPath):
     job.setall(localConfig['cron_schedule'])
     log.info("Setting up cron job under current user at: %s", localConfig['cron_schedule'])
     cron.write()
-

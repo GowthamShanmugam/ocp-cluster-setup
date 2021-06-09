@@ -7,6 +7,7 @@ import urllib.request
 
 from installation_flows.utils import utils
 from installation_flows.deployOcs import deployOcs
+from installation_flows.deployAcm import deployAcm
 from installation_flows.email import sendEmail
 
 def _updateInstallConfig(installConfig, clusterConfig):
@@ -93,7 +94,10 @@ def setupOcpCluster(baseDir):
         password = utils.readConfigFile(dirPath, 'auth', 'kubeadmin-password')
 
         # Deploy OCS
-        deployOcs(baseDir, dirPath, localConfig['deploy_ocs'])
+        deployOcs(baseDir, dirPath, clusterConfig)
+
+        # Subscribe ACM
+        deployAcm(baseDir, dirPath, clusterConfig)
 
         # Send cluster info as email notification
         sendEmail(baseDir, server, password, clusterName, dirPath, openshiftInstallerReleaseFilePath, localConfig['enable_notification'])

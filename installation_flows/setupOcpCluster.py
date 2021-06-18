@@ -89,9 +89,12 @@ def setupOcpCluster(baseDir):
         os.system(os.path.join(baseDir, openshiftInstallerExe) + ' create cluster --dir ' + dirPath)
         log.info('!---------------Cluster is created successfully ------------!')
 
-        kubeConfig = utils.readConfigFile(dirPath, 'auth', 'kubeconfig')['clusters'][0]
-        server = kubeConfig['cluster']['server']
+        kubeConfig = utils.readConfigFile(dirPath, 'auth', 'kubeconfig')
+        server = kubeConfig['clusters'][0]['cluster']['server']
         password = utils.readConfigFile(dirPath, 'auth', 'kubeadmin-password')
+
+        # Store Kubeconfig
+        utils.writeConfigFile(baseDir, "kubeConfig", "kubeConfig", kubeConfig)
 
         # Deploy OCS
         deployOcs(baseDir, dirPath, clusterConfig)

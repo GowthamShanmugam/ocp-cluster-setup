@@ -1,0 +1,11 @@
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  name: ocscluster
+  labels:
+    cloud: auto-detect
+    name: ocscluster
+    vendor: auto-detect
+spec:
+  hubAcceptsClient: true
+  leaseDurationSeconds: 60

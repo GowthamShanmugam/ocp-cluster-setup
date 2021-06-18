@@ -28,14 +28,15 @@
     }
   },
   "ocs": {
-    "deploy_ocs": true,
+    "deploy_ocs": false,
     "ocs_build": "quay.io/ocs-dev/ocs-registry:latest",
-    "ocs_subscription": "ocs-operator.v4.8.0",
+    "ocs_subscription": "ocs-operator.v4.9.0",
     "channel": "alpha"
   },
   "acm": {
     "deploy_acm": false,
-    "acm_subscription": "advanced-cluster-management.v2.2.3",
-    "channel": "release-2.2"
+    "acm_subscription": "advanced-cluster-management.v2.2.4",
+    "channel": "release-2.2",
+    "target_cluster_kubeconfig_path": ""
   }
 }

@@ -94,7 +94,11 @@ def setupOcpCluster(baseDir):
         password = utils.readConfigFile(dirPath, 'auth', 'kubeadmin-password')
 
         # Store Kubeconfig
-        utils.writeConfigFile(baseDir, "kubeConfig", "kubeConfig", kubeConfig)
+        utils.writeConfigFile(baseDir, "helper", "kubeConfig", kubeConfig)
+        
+        # Store infra ID
+        metadata = utils.readConfigFile(dirPath, '', 'metadata.json')
+        utils.writeConfigFile(baseDir, "helper", "infraId.txt", metadata['infraID'])
 
         # Deploy OCS
         deployOcs(baseDir, dirPath, clusterConfig)

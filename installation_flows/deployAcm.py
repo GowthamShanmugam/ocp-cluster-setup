@@ -53,7 +53,9 @@ def checkStatus(clusterDir, cmd, expected, retry=1):
         if status[0] == expected or retry >= 6:
             return
     except Exception:
-        pass
+        if retry >= 5:
+            return
+
 
     time.sleep(60)
     checkStatus(clusterDir, cmd, expected, retry+1)

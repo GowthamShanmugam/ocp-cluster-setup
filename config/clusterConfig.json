@@ -35,7 +35,7 @@
   },
   "acm": {
     "deploy_acm": false,
-    "acm_subscription": "advanced-cluster-management.v2.2.4",
+    "acm_subscription": "advanced-cluster-management.v2.2.5",
     "channel": "release-2.2",
     "target_cluster_kubeconfig_path": ""
   }

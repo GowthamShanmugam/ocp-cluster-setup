@@ -1,0 +1,52 @@
+---
+apiVersion: ocs.openshift.io/v1
+kind: StorageCluster
+metadata:
+  name: ocs-storagecluster
+  namespace: openshift-storage
+spec:
+  manageNodes: false
+  resources:
+    mds:
+      limits:
+        cpu: '3'
+        memory: 8Gi
+      requests:
+        cpu: '1'
+        memory: 8Gi
+    rgw:
+      limits:
+        cpu: '2'
+        memory: 4Gi
+      requests:
+        cpu: '1'
+        memory: 4Gi
+  flexibleScaling: false
+  encryption:
+    enable: false
+    kms: {}
+  arbiter: {}
+  nodeTopologies: {}
+  storageDeviceSets:
+  - name: ocs-deviceset-gp2
+    count: 1
+    portable: true
+    replica: 3
+    resources:
+      limits:
+        cpu: '2'
+        memory: 5Gi
+      requests:
+        cpu: '1'
+        memory: 5Gi
+    placement: {}
+    dataPVCTemplate:
+      spec:
+        storageClassName: gp2
+        accessModes:
+        - ReadWriteOnce
+        volumeMode: Block
+        resources:
+          requests:
+            storage: 2Ti
+

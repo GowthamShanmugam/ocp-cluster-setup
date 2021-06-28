@@ -18,7 +18,7 @@ def readArrayOfConfigFile(baseDir, dirName, filename):
 
 def writeConfigFile(clusterDir, dirName, filename, configs):
     with open(os.path.join(clusterDir, dirName, filename), 'w') as localConfigDump:
-        json.dump(configs, localConfigDump) if 'json' in filename else yaml.dump(configs, localConfigDump, default_flow_style=False, explicit_start=True)
+        json.dump(configs, localConfigDump) if filename.split(".")[-1] in ['json', 'txt']  else yaml.dump(configs, localConfigDump, default_flow_style=False, explicit_start=True)
 
 
 def writeArrayOfConfigFile(clusterDir, dirName, filename, config):
